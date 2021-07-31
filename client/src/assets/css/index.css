@@ -2,3 +2,67 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* odd child style */
+.user-table tbody tr:nth-child(odd){
+    @apply bg-gray-50;
+    @apply dark:bg-gray-400;
+  }
+.active-row {
+    @apply bg-purple-100 !important;
+    @apply dark:bg-gray-700 !important;
+  }
+
+  /* ripple animation */
+.bid-ripple {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .bid-ripple div {
+    position: absolute;
+    border-width: 4px;
+    border-style: solid;
+    opacity: 1;
+    border-radius: 50%;
+    animation: bid-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .bid-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+
+  @keyframes bid-ripple {
+    0% {
+      top: 28px;
+      left: 28px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: -1px;
+      left: -1px;
+      width: 58px;
+      height: 58px;
+      opacity: 0;
+    }
+  }
+/* hide spin button on input type */
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* modal backdrop color */
+.ReactModal__Overlay.ReactModal__Overlay--after-open{
+  @apply bg-black !important;
+  @apply bg-opacity-30 !important;
+}
