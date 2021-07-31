@@ -1,9 +1,12 @@
+import { useMutation } from "@apollo/client";
 import React from "react";
+import { toast } from "react-toastify";
+import { USER_PROFILE_DELETE } from "../../core/gql-operations/mutation/user-profile-delete-mutation";
 import Button from "../common/Button";
 
 const UserTable = ({ loading, data, activeRow, deleteUser, updateUser, currentUserProfiles }) => {
   const tableHeadings = ["Name", "age", "address", "Delete", "Update"];
-
+  const [deleteUserProfile] = useMutation(USER_PROFILE_DELETE);
   return (
     <div className="flex flex-col overflow-x-scroll xl:overflow-x-hidden my-3">
       <table className="user-table shadow overflow-hidden sm:rounded-lg divide-y divide-gray-200">
@@ -48,7 +51,18 @@ const UserTable = ({ loading, data, activeRow, deleteUser, updateUser, currentUs
                     <Button
                       className="text-xs rounded-full"
                       onClick={(e) => {
-                        deleteUser(user._id);
+                        deleteUserProfile({
+                          variables: {
+                            userId: user?._id,
+                          },
+                          refetchQueries: ["ReadUserProfiles"],
+                        })
+                          .then(() => {
+                            toast.success("user profile deleted successfully");
+                          })
+                          .catch((error) => {
+                            toast.error(error.message);
+                          });
                       }}>
                       Delete
                     </Button>
