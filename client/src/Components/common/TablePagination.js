@@ -1,10 +1,10 @@
 import React from "react";
 import { projectTheme } from "../../Config/ProjectTheme";
 
-const TablePagination = ({ employeesPerPage, totalEmployees, paginate, currentPage }) => {
+const TablePagination = ({ UserProfilesPerPage, totalUsers, paginate, currentPage }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalEmployees / employeesPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalUsers / UserProfilesPerPage); i++) {
     pageNumbers.push(i);
   }
 

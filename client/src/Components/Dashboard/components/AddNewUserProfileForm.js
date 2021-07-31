@@ -47,10 +47,14 @@ const AddNewUserProfileForm = ({
             onProfileDataChange(e);
           }}
         />
+        {/* ToDo:
+          1. User a service provider to upload user avatars
+          2. give user a function to upload photos
+        */}
         <FormInputBox
           label="Profile Picture"
           icon={<Image />}
-          placeholder="Profile Picture"
+          placeholder="Profile Picture URL"
           name="profilePic"
           type="text"
           ariaLabel="ProfilePicture"
@@ -71,6 +75,12 @@ const AddNewUserProfileForm = ({
             onProfileDataChange(e);
           }}
         />
+        {/* ToDo:
+          1. Use date picker to get age
+          2. Calculate age as per current date and selected date
+          3. Apply validation.
+          4. Restrict date to be choosen only last 100 years.
+        */}
         <FormInputBox
           label="Age"
           icon={<Hash />}

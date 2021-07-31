@@ -23,7 +23,7 @@ const Dashboard = () => {
     };
   }, [data, startPolling, stopPolling]);
 
-  // employee table pagination logic
+  // user table pagination logic
   const [userProfiles, setUserProfiles] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [userProfilesPerPage] = useState(10);
@@ -77,8 +77,8 @@ const Dashboard = () => {
         loading={loading}
       />
       <TablePagination
-        employeesPerPage={userProfilesPerPage}
-        totalEmployees={userProfiles?.length}
+        UserProfilesPerPage={userProfilesPerPage}
+        totalUsers={userProfiles?.length}
         paginate={paginate}
         currentPage={currentPage}
       />

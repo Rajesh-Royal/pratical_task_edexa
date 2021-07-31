@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { UserProfileType } from "../shared/employee.type";
+import { UserProfileType } from "../shared/user.type";
 import { UserProfileCreateMutationModel } from "./service/userProfile-create.mutation.model";
 import { UserProfileDeleteMutationModel } from "./service/userProfile-delete.mutation.model";
 import { UserProfileReadQueryModel } from "./service/userProfile-read.query.model";
