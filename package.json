@@ -19,7 +19,9 @@
     "start": "craco  start",
     "build": "craco build",
     "test": "craco  test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src/**/*.{js,jsx,ts,tsx}",
+    "lint:fix": "prettier ./src/**/*.{js,jsx,ts,tsx} --write && eslint ./src/**/*.{js,jsx,ts,tsx} --fix"
   },
   "devDependencies": {
     "autoprefixer": "9",
