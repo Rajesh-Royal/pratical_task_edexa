@@ -1,7 +1,12 @@
 {
   "name": "pratical_task_edexa",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
+  "repository": "https://github.com/Rajesh-Royal/pratical_task_edexa",
+  "author": "Rajesh Royal",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "CRUD app with authentication and authorization. ReactJS, NestJS, GraphQL, MongoDB",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.11.4",
