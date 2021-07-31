@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Button from "../Components/common/Button";
 import FormInputBox from "../Components/common/FormInputBox";
 import { USER_SIGNUP } from "../core/gql-operations/mutation/user-signup-mutation";
+import { validateEmail, validateUsername } from "../Util/UtilityFunctions";
 
 const SignUp = () => {
   const [signupUser] = useMutation(USER_SIGNUP);
@@ -30,6 +31,18 @@ const SignUp = () => {
     });
   };
   const history = useHistory();
+
+  const validateUserData = () => {
+    if (!validateUsername(userCredentials.username)) {
+      toast.error("Username should only contain:  a-z, 0-9, dots or _", { autoClose: 7000 });
+      return false;
+    }
+    if (!validateEmail(userCredentials.email)) {
+      toast.error("Email is not valid", 7000);
+      return false;
+    }
+    return true;
+  };
   return (
     <div className={"w-screen h-screen overflow-hidden bg-gray-700"}>
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
@@ -86,7 +99,8 @@ const SignUp = () => {
                       icon={null}
                       placeholder="Mobile"
                       name="mobile"
-                      type="number"
+                      type="tel"
+                      maxLength={12}
                       textLeft={true}
                       ariaLabel="mobile"
                       value={userCredentials?.mobile}
@@ -97,37 +111,41 @@ const SignUp = () => {
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
-                        setRequestLoading(true);
-                        signupUser({
-                          variables: userCredentials,
-                        })
-                          .then((data) => {
-                            toast.success(`Registered new user ${userCredentials?.username}`);
-                            setRequestLoading(false);
-                            history.push("/auth/login");
-                            return data;
+                        // validation is performed at server side also
+                        // displayed in toast
+                        if (validateUserData()) {
+                          setRequestLoading(true);
+                          signupUser({
+                            variables: userCredentials,
                           })
-                          .catch((error) => {
-                            if (
-                              error?.graphQLErrors[0]?.extensions?.exception?.response?.message
-                                ?.length > 0
-                            ) {
-                              error?.graphQLErrors[0]?.extensions?.exception?.response?.message?.forEach(
-                                (message) => {
-                                  toast.error(message, { autoClose: 7000 });
-                                }
-                              );
+                            .then((data) => {
+                              toast.success(`Registered new user ${userCredentials?.username}`);
                               setRequestLoading(false);
-                            } else {
-                              toast.error(
-                                `${error.message}. Data validation failed, please check your input data`,
-                                { autoClose: 7000 }
-                              );
-                              setRequestLoading(false);
-                            }
+                              history.push("/auth/login");
+                              return data;
+                            })
+                            .catch((error) => {
+                              if (
+                                error?.graphQLErrors[0]?.extensions?.exception?.response?.message
+                                  ?.length > 0
+                              ) {
+                                error?.graphQLErrors[0]?.extensions?.exception?.response?.message?.forEach(
+                                  (message) => {
+                                    toast.error(message, { autoClose: 7000 });
+                                  }
+                                );
+                                setRequestLoading(false);
+                              } else {
+                                toast.error(
+                                  `${error.message}. Data validation failed, please check your input data`,
+                                  { autoClose: 7000 }
+                                );
+                                setRequestLoading(false);
+                              }
 
-                            return error;
-                          });
+                              return error;
+                            });
+                        }
                       }}
                       isLoading={requestLoading}>
                       Signup
