@@ -1,9 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from "../Components/common/Button";
 import FormInputBox from "../Components/common/FormInputBox";
+import { USER_LOGIN } from "../core/gql-operations/mutation/user-login-mutation";
 
 const Login = () => {
+  const [loginUser] = useMutation(USER_LOGIN);
+  const [userCredentials, setUserCredentials] = useState({
+    username: "",
+    password: "",
+  });
+  const [requestLoading, setRequestLoading] = useState(false);
+  const onInputChange = (e) => {
+    setUserCredentials({
+      ...userCredentials,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const history = useHistory();
   return (
     <div className={"w-screen h-screen overflow-hidden bg-gray-700"}>
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
@@ -24,8 +40,8 @@ const Login = () => {
                       type="text"
                       textLeft={true}
                       ariaLabel="username"
-                      value={""}
-                      onChange={(e) => true}
+                      value={userCredentials?.username}
+                      onChange={(e) => onInputChange(e)}
                     />
                   </div>
                   <div className="flex flex-col -mt-4">
@@ -37,8 +53,8 @@ const Login = () => {
                       type="password"
                       textLeft={true}
                       ariaLabel="password"
-                      value={""}
-                      onChange={(e) => true}
+                      value={userCredentials?.password}
+                      onChange={(e) => onInputChange(e)}
                     />
                   </div>
                   <div className="flex items-center mt-4">
@@ -56,7 +72,22 @@ const Login = () => {
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
-                      }}>
+                        setRequestLoading(true);
+                        loginUser({
+                          variables: userCredentials,
+                        })
+                          .then((data) => {
+                            localStorage.setItem("employeeToken", data?.data?.LoginUser?.token);
+                            toast.success(`User ${userCredentials?.username}  Logged In`);
+                            setRequestLoading(false);
+                            history.push("/dashboard");
+                          })
+                          .catch((error) => {
+                            setRequestLoading(false);
+                            toast.error(error.message);
+                          });
+                      }}
+                      isLoading={requestLoading}>
                       Login
                     </Button>
                   </div>
