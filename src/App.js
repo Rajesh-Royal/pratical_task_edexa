@@ -1,10 +1,16 @@
 import React from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Layout from "./Container/Layout";
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
+    <React.Fragment>
+      <Router>
+        <Switch>
+          <Layout {...props} />
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 }
 
