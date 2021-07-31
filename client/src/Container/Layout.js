@@ -1,9 +1,10 @@
 import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import Header from "../Components/common/Header";
 import { ProtectedRoute } from "../Components/common/ProtectedRoute";
+import ThemedSuspense from "../Components/global/ThemedSuspense";
 import ToastMessageContainer from "../Components/global/ToastContainer.js";
 import { privateRoutes, publicRoutes } from "../Routes/Routes";
-import ThemedSuspense from "../Components/global/ThemedSuspense";
 
 const Page404 = lazy(() => import("../Pages/Page404"));
 
@@ -11,6 +12,7 @@ function Layout() {
   return (
     <React.Fragment>
       <ToastMessageContainer />
+      <Header />
       <Suspense fallback={<ThemedSuspense className="mt-5" />}>
         <Switch>
           {/* public route accessed by non logged in user */}

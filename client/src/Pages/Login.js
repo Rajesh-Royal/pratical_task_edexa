@@ -77,7 +77,7 @@ const Login = () => {
                           variables: userCredentials,
                         })
                           .then((data) => {
-                            localStorage.setItem("employeeToken", data?.data?.LoginUser?.token);
+                            localStorage.setItem("edexaToken", data?.data?.LoginUser?.token);
                             toast.success(`User ${userCredentials?.username}  Logged In`);
                             setRequestLoading(false);
                             history.push("/dashboard");
