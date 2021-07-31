@@ -1,6 +1,6 @@
 export const projectTheme = {
-  background: "bg-orange-300",
-  borderColor: "border-orange-400",
-  textColor: "text-orange-400",
-  closeXButtonColor: "text-orange-400",
+  background: "bg-pink-300",
+  borderColor: "border-pink-400",
+  textColor: "text-pink-400",
+  closeXButtonColor: "text-pink-400",
 };
