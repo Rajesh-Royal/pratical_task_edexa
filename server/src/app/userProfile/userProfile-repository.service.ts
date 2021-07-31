@@ -3,6 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { UserProfileType } from "../shared/employee.type";
 import { UserProfileCreateMutationModel } from "./service/userProfile-create.mutation.model";
+import { UserProfileDeleteMutationModel } from "./service/userProfile-delete.mutation.model";
 import { UserProfileReadQueryModel } from "./service/userProfile-read.query.model";
 
 @Injectable()
@@ -29,5 +30,11 @@ export class UserProfileRepositoryService {
 
     public readUserProfiles(): Promise<UserProfileType[]> {
         return this.userProfileModel.find({}).exec();
+    }
+
+    public deleteUserProfile(operation: UserProfileDeleteMutationModel) {
+        return this.userProfileModel.deleteOne({
+            _id: operation.userId
+        })
     }
 }

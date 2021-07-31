@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserProfileCreateMutationService } from './service/userProfile-create.service';
+import { UserProfileDeleteMutationService } from './service/userProfile-delete-mutation.service';
 import { UserProfileReadQueryService } from './service/userProfile-read-query.service';
 import { UserProfileRepositoryService } from './userProfile-repository.service';
 import { UserProfileResolver } from './userProfile.resolver';
@@ -20,7 +21,8 @@ import { UserProfileModuleSchema } from './userProfile.schema';
     UserProfileCreateMutationService,
     UserProfileRepositoryService,
     UserProfileReadQueryService,
-    UserProfileResolver
+    UserProfileResolver,
+    UserProfileDeleteMutationService
   ],
   exports: [
     MongooseModule,
