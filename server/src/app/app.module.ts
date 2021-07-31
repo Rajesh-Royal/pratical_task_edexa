@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
+import { UserProfileModule } from './userProfile/userProfile.module';
 
 const localMongoURI = "mongodb://localhost:27017/edexa";
 
@@ -23,6 +24,7 @@ const localMongoURI = "mongodb://localhost:27017/edexa";
     }),
     ScheduleModule.forRoot(),
     AuthModule,
+    UserProfileModule
   ],
 })
 export class AppModule {}

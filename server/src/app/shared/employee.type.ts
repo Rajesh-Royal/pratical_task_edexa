@@ -1,12 +1,9 @@
 import { Document } from 'mongoose';
-import { SalaryType } from './salary.type';
 
-export interface EmployeeType extends Document {
+export interface UserProfileType extends Document {
   _id?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  city: string;
-  ctc: number;
-  salary?: SalaryType | string
+  name: string,
+  profilePic: string,
+  address: string,
+  age: number
 }
