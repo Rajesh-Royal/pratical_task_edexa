@@ -5,14 +5,14 @@ export const validateEmail = (email) => {
 };
 
 export const validateUsername = (userName) => {
-  /*
-    Usernames can only have:
-    - Lowercase Letters (a-z)
-    - Numbers (0-9)
-    - Dots (.)
-    - Underscores (_)
-  */
   const res = /^[a-z0-9_\.]+$/.exec(userName);
+  const valid = !!res;
+  return valid;
+};
+
+// dumbest age validation
+export const validateUserAge = (userAge) => {
+  const res = /^[1-9]?[0-9]{1}$|^100$/.exec(userAge);
   const valid = !!res;
   return valid;
 };

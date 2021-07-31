@@ -18,8 +18,8 @@
     "start:all": "concurrently \"yarn start:client\" \"yarn start:server\""
   },
   "dependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "react-modal": "^3.14.3"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

@@ -4,6 +4,7 @@ import { USER_PROFILES_LIST_READ } from "../../core/gql-operations/query/user-pr
 import { SortByAge, SortByName } from "../../Util/SortByAge";
 import TablePagination from "../common/TablePagination";
 import Filters from "../Filters";
+import AddNewUserProfileButton from "./components/AddNewUserProfileButton";
 import UserTable from "./UsersTable";
 
 const Dashboard = () => {
@@ -50,9 +51,25 @@ const Dashboard = () => {
       setUserProfiles(SortByName(userProfiles) || userProfiles);
     }
   };
+
+  const filterUserProfilesByName = (value) => {
+    if (value === "") {
+      setUserProfiles(data?.ReadUserProfiles);
+      return 0;
+    }
+    var filteredUserProfile = data?.ReadUserProfiles.filter(function (user) {
+      if (user?.name?.includes(value)) {
+        return user;
+      }
+    });
+    setUserProfiles(filteredUserProfile);
+  };
   return (
     <div>
-      <Filters sortUsersProfiles={sortUsersProfiles} />
+      <Filters
+        sortUsersProfiles={sortUsersProfiles}
+        filterUserProfilesByName={filterUserProfilesByName}
+      />
       <UserTable
         currentUserProfiles={currentUserProfiles}
         activeRow={activeRow}
@@ -65,6 +82,7 @@ const Dashboard = () => {
         paginate={paginate}
         currentPage={currentPage}
       />
+      <AddNewUserProfileButton />
     </div>
   );
 };
